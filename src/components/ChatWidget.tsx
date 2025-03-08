@@ -24,6 +24,7 @@ const ChatWidget: React.FC = () => {
     try {
       const response = await fetch("https://script.google.com/macros/s/AKfycbwo9j76zMVzO02nkZXLE82fXT-eQQ07H4WED2UXO9FLTxzmWz1HBnzsyqPC_f64yRTo7Q/exec?=null", {
         method: "POST",
+        redirect: "follow",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input }),
       });
