@@ -51,7 +51,7 @@ const ChatWidget: React.FC = () => {
                 <FaTimes size={20} />
             </button>
         </div>
-        <div className="p-4 h-full overflow-y-auto space-y-2">
+        <div className="p-4 h-92 overflow-y-auto space-y-2">
             {messages.map((msg, index) => (
             <div
                 key={index}
