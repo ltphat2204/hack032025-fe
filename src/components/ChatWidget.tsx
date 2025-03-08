@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { FaPaperPlane, FaTimes } from "react-icons/fa";
 import { BsChat } from "react-icons/bs";
@@ -13,7 +13,8 @@ const ChatWidget: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSendMessage = async () => {
+  const handleSendMessage = async (e: FormEvent) => {
+    e.preventDefault();
     if (!input.trim()) return;
     const userMessage = { text: input, isUser: true };
     setMessages((prev) => [...prev, userMessage]);
@@ -66,7 +67,7 @@ const ChatWidget: React.FC = () => {
             ))}
             {loading && <div className="text-center text-sky-500">Loading...</div>}
         </div>
-        <div className="p-4 border-t border-sky-200 flex items-center gap-2">
+        <form onSubmit={handleSendMessage} className="p-4 border-t border-sky-200 flex items-center gap-2">
             <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -74,13 +75,13 @@ const ChatWidget: React.FC = () => {
                 className="flex-1 p-2 border border-sky-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
             />
             <button
-                onClick={handleSendMessage}
+                type="submit"
                 disabled={loading}
                 className="p-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 disabled:opacity-50 cursor-pointer"
             >
             <FaPaperPlane size={18} />
             </button>
-        </div>
+        </form>
         </motion.div>
     </>
   );
