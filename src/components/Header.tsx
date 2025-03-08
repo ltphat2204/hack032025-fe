@@ -4,7 +4,7 @@ export default function Header() {
     return (
       <header className="p-4 w-screen">
         <div className="rounded p-4 bg-white flex items-center justify-center">
-          <Image src="/logo.png" width={123} height={32} alt="StudyVerse" className="h-[32px] w-auto" />
+          <Image src="/logo.png" width={784} height={198} alt="StudyVerse" className="h-14 w-auto" />
         </div>
       </header>
     );

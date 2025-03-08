@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-sky-100 text-sky-950`}>
         <Header/>
         <div
-          style={{ height: `calc(100vh - 96px)` }}
+          style={{ height: `calc(100vh - 120px)` }}
           className="flex w-screen space-x-4 p-4"
         >
         <SideTab/>

@@ -15,7 +15,7 @@ interface EmotionRaw {
 }
 
 const COLORS: { [key: string]: string } = {
-  'Excited': '#16a34a',
+  'Happy': '#16a34a',
   'Tired': '#7c3aed',
   'Angry': '#dc2626',
   'Sad': '#3b82f6',
@@ -43,7 +43,7 @@ export default function EmotionProbabilityChart() {
   }, []);
 
   return (
-    <div className="p-4 shadow-md border border-sky-500 bg-white rounded-2xl my-4">
+    <div className="p-4 shadow-md border border-sky-500 bg-white rounded-2xl flex-1/2">
       <h2 className="text-xl font-semibold text-sky-950 mb-4">Emotion Probability</h2>
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
