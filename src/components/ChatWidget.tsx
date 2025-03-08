@@ -23,7 +23,7 @@ const ChatWidget: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://script.google.com/macros/s/AKfycbwo9j76zMVzO02nkZXLE82fXT-eQQ07H4WED2UXO9FLTxzmWz1HBnzsyqPC_f64yRTo7Q/exec", {
+      const response = await axios.post("https://script.google.com/macros/s/AKfycbwveizmxcCSjHsYqWwTgmc6y9XzVnsqOZ7MjY62dxc7LN7BwhYt2bSfSUiuDmDCC6MjFw/exec?", {
         body: JSON.stringify({ message: input }),
       });
       const data = response.data;
