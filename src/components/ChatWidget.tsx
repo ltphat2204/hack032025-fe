@@ -8,7 +8,9 @@ import axios from "axios";
 
 const ChatWidget: React.FC = () => {
   const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>(
-    []
+    [
+      { text: 'Hi! How can I help you?', isUser: false }
+    ]
   );
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -51,7 +53,7 @@ const ChatWidget: React.FC = () => {
                 <FaTimes size={20} />
             </button>
         </div>
-        <div className="p-4 h-92 overflow-y-auto space-y-2">
+        <div className="p-4 overflow-y-auto space-y-2" style={{ height: 'calc(100vh - 200px)' }}>
             {messages.map((msg, index) => (
             <div
                 key={index}
