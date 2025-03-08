@@ -45,8 +45,12 @@ export default function SentenceTable() {
                         {sentences.map((item, index) => (
                         <tr key={index} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} border-b border-gray-300`}>
                             <td className="px-4 py-2 flex items-start gap-2">
-                                <FiMessageCircle className="text-sky-500 mt-1" />
-                                <span className="break-words">{item.sentence}</span>
+                                <FiMessageCircle className="text-sky-500 mt-1" style={{
+                                    flexBasis: '1rem',
+                                }}/>
+                                <span className="break-words" style={{
+                                    flexBasis: '(100% - 1rem)',
+                                }}>{item.sentence}</span>
                             </td>
                             <td className="px-4 py-2" style={{ color: COLORS[item.emotion] }}>
                                 {item.emotion}
