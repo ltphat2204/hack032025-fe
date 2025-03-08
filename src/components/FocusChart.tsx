@@ -10,14 +10,26 @@ interface FocusData {
 
 const generateMockData = (): FocusData[] => {
   const data: FocusData[] = [];
+  const focusTimes = {
+    weekday: [0, 1, 2, 3, 4],
+    weekend: [4, 5, 6, 7] 
+  };
+
   for (let i = 13; i >= 0; i--) {
     const date = new Date();
     date.setDate(date.getDate() - i);
+    
+    const dayOfWeek = date.getDay();
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    
     data.push({
       date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-      focusTime: Math.floor(Math.random() * 12)
+      focusTime: isWeekend 
+        ? focusTimes.weekend[Math.floor(Math.random() * focusTimes.weekend.length)]
+        : focusTimes.weekday[Math.floor(Math.random() * focusTimes.weekday.length)]
     });
   }
+  
   return data;
 };
 
