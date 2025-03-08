@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { FaPaperPlane, FaTimes } from "react-icons/fa";
 import { BsChat } from "react-icons/bs";
+import axios from "axios";
 
 const ChatWidget: React.FC = () => {
   const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>(
@@ -22,12 +23,10 @@ const ChatWidget: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbwo9j76zMVzO02nkZXLE82fXT-eQQ07H4WED2UXO9FLTxzmWz1HBnzsyqPC_f64yRTo7Q/exec?=null", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await axios.post("https://script.google.com/macros/s/AKfycbwo9j76zMVzO02nkZXLE82fXT-eQQ07H4WED2UXO9FLTxzmWz1HBnzsyqPC_f64yRTo7Q/exec", {
         body: JSON.stringify({ message: input }),
       });
-      const data = await response.json();
+      const data = response.data;
       setMessages((prev) => [...prev, { text: data.answer, isUser: false }]);
     } catch (error) {
       setMessages((prev) => [...prev, { text: "Error fetching response", isUser: false }]);
