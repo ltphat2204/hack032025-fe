@@ -23,9 +23,7 @@ const ChatWidget: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://script.google.com/macros/s/AKfycbwveizmxcCSjHsYqWwTgmc6y9XzVnsqOZ7MjY62dxc7LN7BwhYt2bSfSUiuDmDCC6MjFw/exec?", {
-        body: JSON.stringify({ message: input }),
-      });
+      const response = await axios.get("https://script.google.com/macros/s/AKfycbwveizmxcCSjHsYqWwTgmc6y9XzVnsqOZ7MjY62dxc7LN7BwhYt2bSfSUiuDmDCC6MjFw/exec?message=" + input);
       const data = response.data;
       setMessages((prev) => [...prev, { text: data.answer, isUser: false }]);
     } catch (error) {
@@ -45,7 +43,7 @@ const ChatWidget: React.FC = () => {
             initial={{ x: "140%" }}
             animate={{ x: isOpen ? "0%" : "140%" }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-4 right-4 w-80 bg-sky-50 shadow-xl rounded-lg overflow-hidden border border-sky-300"
+            className="fixed bottom-4 right-4 w-92 bg-sky-50 shadow-xl rounded-lg overflow-hidden border border-sky-300"
         >
         <div className="flex items-center justify-between p-4 bg-sky-600 text-white">
             <span>AI Agent</span>
@@ -53,7 +51,7 @@ const ChatWidget: React.FC = () => {
                 <FaTimes size={20} />
             </button>
         </div>
-        <div className="p-4 h-64 overflow-y-auto space-y-2">
+        <div className="p-4 h-full overflow-y-auto space-y-2">
             {messages.map((msg, index) => (
             <div
                 key={index}
