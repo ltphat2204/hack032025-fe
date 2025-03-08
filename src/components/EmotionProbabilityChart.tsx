@@ -2,21 +2,17 @@
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface EmotionData {
-  name: string;
+  emotion: string;
   value: number;
 }
 
-const generateMockEmotionData = (): EmotionData[] => {
-  return [
-    { name: 'Excited', value: Math.random() * 100 },
-    { name: 'Tired', value: Math.random() * 100 },
-    { name: 'Angry', value: Math.random() * 100 },
-    { name: 'Sad', value: Math.random() * 100 },
-    { name: 'Anxious', value: Math.random() * 100 },
-  ];
-};
+interface EmotionRaw {
+  emotion: string;
+  value: string;
+}
 
 const COLORS: { [key: string]: string } = {
   'Excited': '#16a34a',
@@ -24,13 +20,26 @@ const COLORS: { [key: string]: string } = {
   'Angry': '#dc2626',
   'Sad': '#3b82f6',
   'Anxious': '#ea580c',
+  'Neutral': '#c3c3c3',
 };
 
 export default function EmotionProbabilityChart() {
   const [data, setData] = useState<EmotionData[]>([]);
 
   useEffect(() => {
-    setData(generateMockEmotionData());
+    const getData = async () => {
+      const response = await axios.get("https://script.google.com/macros/s/AKfycbwveizmxcCSjHsYqWwTgmc6y9XzVnsqOZ7MjY62dxc7LN7BwhYt2bSfSUiuDmDCC6MjFw/exec?b=true");
+      const rawData = response.data;
+
+        const processedData: EmotionData[] = rawData.map((item: EmotionRaw) => ({
+          emotion: item.emotion,
+          value: Number(item.value),
+        }));
+
+        setData(processedData);
+    };
+
+    getData();
   }, []);
 
   return (
@@ -38,9 +47,9 @@ export default function EmotionProbabilityChart() {
       <h2 className="text-xl font-semibold text-sky-950 mb-4">Emotion Probability</h2>
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
-          <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} fill="#0284c7" label>
+          <Pie data={data} dataKey="value" nameKey="emotion" cx="50%" cy="50%" outerRadius={100} fill="#0284c7" label>
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
+              <Cell key={`cell-${index}`} fill={COLORS[entry.emotion]} />
             ))}
           </Pie>
           <Tooltip contentStyle={{ backgroundColor: "#e0f2fe", borderColor: "#0ea5e9" }} />
