@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FiMessageCircle } from "react-icons/fi";
 
 interface SentenceData {
   sentence: string;
